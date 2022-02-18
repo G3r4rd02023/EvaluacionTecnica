@@ -1,15 +1,21 @@
-﻿using Microsoft.AspNetCore.Mvc.Rendering;
+﻿using EvaluacionTecnica.Data.Entities;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace EvaluacionTecnica.Data.Entities
+namespace EvaluacionTecnica.Models
 {
-    public class Customer
+    public class CustomerViewModel
     {
         public int Id { get; set; }
+
+        [Display(Name = "Genero")]
+        [Range(1, int.MaxValue, ErrorMessage = "Debes seleccionar un genero.")]
+        [Required(ErrorMessage = "El campo {0} es obligatorio.")]
+        public int GenderId { get; set; }
 
         [Display(Name = "Numero de Cliente")]
         [MaxLength(10, ErrorMessage = "El campo {0} no puede tener más de {1} carácteres.")]
@@ -42,12 +48,11 @@ namespace EvaluacionTecnica.Data.Entities
         [Display(Name = "Genero")]
         public Gender Gender { get; set; }
 
-       
 
         [Display(Name = "Lugar de Nacimiento")]
-        [MaxLength(50, ErrorMessage = "El campo {0} no puede tener más de {1} carácteres.")]       
+        [MaxLength(50, ErrorMessage = "El campo {0} no puede tener más de {1} carácteres.")]
         public string City { get; set; }
 
-        public ICollection<Account> Accounts { get; set; }
+        public IEnumerable<SelectListItem> Genders { get; set; }
     }
 }
